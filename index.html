@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta name="theme-color" content="#0c0f14" />
+  <title>CHTAVIED.NDA AI — हर सवाल का साथी</title>
+  <meta name="description" content="CHTAVIED.NDA AI — हिंदी, अंग्रेज़ी या किसी भी भाषा में पूछिए। लेखन, पढ़ाई, गणना और प्रोग्रामिंग के लिए एक MASTER AI जो सही विशेषज्ञ चुनता है।" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f97316'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='system-ui' font-size='30' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <span class="brand-mark">C</span>
+          <div>
+            <div class="brand-name">CHTAVIED.NDA AI</div>
+            <div class="brand-sub">विशेषज्ञों का साम्राज्य</div>
+          </div>
+        </div>
+        <button class="icon-btn close-sidebar" id="closeSidebar" aria-label="बंद करें">✕</button>
+      </div>
+
+      <button class="new-chat" id="newChatBtn">＋ नई चैट</button>
+
+      <div class="chats-head">
+        <span>हाल की चैट</span>
+        <button class="link-btn" id="clearAllBtn">साफ़ करें</button>
+      </div>
+      <div class="chat-list" id="chatList"></div>
+
+      <div class="sidebar-foot">
+        <div class="model-row">
+          <label for="modelSelect">मॉडल</label>
+          <select id="modelSelect">
+            <option value="auto">ऑटो (सबसे अच्छा उपलब्ध)</option>
+            <option value="openai">GPT</option>
+            <option value="anthropic">Claude</option>
+            <option value="gemini">Gemini</option>
+          </select>
+        </div>
+        <div class="safe-note">🔒 API keys केवल सर्वर पर — ऐप में कभी नहीं।</div>
+        <div class="user-chip">
+          <div class="avatar" id="userAvatar">अ</div>
+          <div class="user-meta">
+            <div class="user-name" id="userName">अतिथि</div>
+            <div class="user-sub" id="userSub">चैट इसी डिवाइस पर सुरक्षित</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="मेन्यू">☰</button>
+        <div class="topbar-title">
+          <h1 id="chatTitle">नई चैट</h1>
+          <span class="topbar-sub" id="topbarSub">MASTER AI · तैयार</span>
+        </div>
+        <button class="icon-btn" id="themeBtn" aria-label="थीम बदलें">◐</button>
+      </header>
+
+      <div class="banner" id="setupBanner" hidden>
+        <strong>सेटअप बाकी है।</strong>
+        <span id="setupText"></span>
+      </div>
+
+      <div class="expert-strip" id="expertStrip"></div>
+
+      <section class="messages" id="messages" aria-live="polite">
+        <div class="welcome" id="welcome">
+          <div class="welcome-mark">C</div>
+          <h2>हर सवाल का साथी, विशेषज्ञों का साम्राज्य।</h2>
+          <p>CHTAVIED.NDA AI से हिंदी, अंग्रेज़ी या किसी भी भाषा में पूछिए — लेखन, पढ़ाई, गणना और प्रोग्रामिंग। एक MASTER AI आपके काम के लिए सही विशेषज्ञ चुनता है।</p>
+          <div class="suggestions" id="suggestions">
+            <button class="suggestion" data-prompt="पाइथागोरस प्रमेय समझाओ">पाइथागोरस प्रमेय समझाओ</button>
+            <button class="suggestion" data-prompt="एक छोटी सी हिंदी कविता लिखो — बारिश पर">बारिश पर कविता</button>
+            <button class="suggestion" data-prompt="JavaScript में debounce फंक्शन उदाहरण के साथ समझाओ">debounce समझाओ</button>
+            <button class="suggestion" data-prompt="12वीं के बाद करियर के 5 विकल्प बताओ">12वीं के बाद करियर</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="composer-wrap">
+        <div class="attach-preview" id="attachPreview" hidden>
+          <img id="attachImg" alt="attachment" />
+          <button class="icon-btn" id="removeAttach" aria-label="हटाएँ">✕</button>
+        </div>
+        <form class="composer" id="composer">
+          <button type="button" class="icon-btn attach-btn" id="attachBtn" aria-label="फोटो जोड़ें">📎</button>
+          <textarea id="input" rows="1" placeholder="अपना सवाल लिखिए… (Hindi, English, Hinglish)" autocomplete="off"></textarea>
+          <button type="button" class="icon-btn mic-btn" id="micBtn" aria-label="बोलकर पूछें">🎙</button>
+          <button type="submit" class="send-btn" id="sendBtn" aria-label="भेजें">➤</button>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </form>
+        <div class="composer-note">AI गलती कर सकता है — ज़रूरी बातें जाँच लें।</div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <script src="/app.js"></script>
+</body>
+</html>
